@@ -8,14 +8,12 @@ use App\QueryBuilder;
 class MessageRepository extends QueryBuilder
 {
     private $db;
+    protected $table = "messages";
 
     public function __construct() 
     {
         $this->db = Connection::getMyPDO();
     }
-
-    protected $table = "messages";
-
     
     public function findAll(?string $order = ""): array
     {
@@ -24,7 +22,7 @@ class MessageRepository extends QueryBuilder
 
     }
 
-    public function find(int $id): array
+    public function findById(int $id): array
     {
         $query = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
         $query->execute(['id' => $id]);
