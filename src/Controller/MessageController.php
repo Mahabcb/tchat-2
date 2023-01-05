@@ -29,11 +29,6 @@ class MessageController
         return $messages;
     }
 
-    public function postMessages()
-    {
-        return $this->messageRepository->addMessages($_POST['message'], $_POST['user']);
-    }
-
     public function handleRequest()
     {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -54,6 +49,11 @@ class MessageController
                 echo "Veuillez remplir tous les champs";
             }
         }
+    }
+
+    private function postMessages()
+    {
+        return $this->messageRepository->addMessages($_POST['message'], $_POST['user']);
     }
 
 }
